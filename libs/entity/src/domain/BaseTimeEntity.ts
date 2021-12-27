@@ -1,6 +1,7 @@
 import { BeforeInsert, BeforeUpdate, Column, Generated, PrimaryColumn } from "typeorm";
 import { LocalDateTime } from "@js-joda/core";
 import { BigintTransformer } from "@app/entity/transformer/BigintTransformer";
+import { LocalDateTimeTransformer } from "@app/entity/transformer/LocalDateTimeTransformer";
 
 export abstract class BaseTimeEntity {
   @Generated('increment')
@@ -9,12 +10,14 @@ export abstract class BaseTimeEntity {
 
   @Column({
     type: 'timestamptz',
+    transformer: new LocalDateTimeTransformer(),
     nullable: false
   })
   createdAt: LocalDateTime;
 
   @Column({
     type: 'timestamptz',
+    transformer: new LocalDateTimeTransformer(),
     nullable: false
   })
   updatedAt: LocalDateTime;
